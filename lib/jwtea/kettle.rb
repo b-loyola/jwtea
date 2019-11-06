@@ -20,19 +20,24 @@ module JWTea
       token
     end
 
+    def pour(encoded_token)
+      with_token(encoded_token) do |token|
+        raise ::JWTea::InvalidToken.new('token revoked') unless token_exists?(token)
+
+        token
+      end
+    rescue ::JWT::DecodeError => e
+      raise ::JWTea::InvalidToken.new(e.message)
+    end
+
     def encode(data)
       token = brew(data)
       token.encoded
     end
 
     def decode(encoded_token)
-      with_token(encoded_token) do |token|
-        raise ::JWTea::InvalidToken.new('token revoked') unless token_exists?(token)
-
-        token.payload.to_h
-      end
-    rescue ::JWT::DecodeError => e
-      raise ::JWTea::InvalidToken.new(e.message)
+      token = pour(encoded_token)
+      token.data
     end
 
     def revoke(encoded_token)
@@ -47,7 +52,7 @@ module JWTea
 
     # Prevent sentitive data from being accidentally logged to console
     def inspect
-      "#<#{self.class} expires_in: #{@expires_in} seconds, store: #{@store}>"
+      "#<#{self.class} expires_in: #{@expires_in}, store: #{@store}>"
     end
 
     # Prevent sentitive data from being accidentally rendered to json
