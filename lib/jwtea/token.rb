@@ -19,10 +19,15 @@ module JWTea
 
     attr_accessor :encoded
     attr_reader :payload
-    delegate :exp, :jti, to: :payload
+    delegate :data, :exp, :jti, to: :payload
 
     def initialize(payload)
       @payload = JWTea::Token::Payload.from_hash(payload)
+    end
+
+    # Prevent sentitive data from being accidentally logged to console
+    def inspect
+      to_s
     end
   end
 end
