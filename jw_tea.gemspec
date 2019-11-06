@@ -1,16 +1,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "jwtea/version"
+require "jw_tea/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "jwtea-rb"
+  spec.name          = "jw_tea"
   spec.version       = JWTea::VERSION
   spec.authors       = ["Ben Loyola"]
   spec.email         = ["berna.loyola@gmail.com"]
 
   spec.summary       = "A gem to facilitate JWT authentication in web apps."
-  spec.homepage      = "https://github.com/b-loyola/jwtea"
+  spec.homepage      = "https://github.com/b-loyola/jw_tea"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.

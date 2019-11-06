@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "jwtea"
+require "jw_tea"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -2,9 +2,9 @@
 require 'active_support/core_ext/time/calculations'
 require 'active_support/core_ext/numeric/time'
 
-require_relative File.join('jwtea', 'version')
-require_relative File.join('jwtea', 'kettle')
-Dir[File.join(File.dirname(__FILE__), 'jwtea', 'stores', '*.rb')].each {|file| require file }
+require_relative File.join('jw_tea', 'version')
+require_relative File.join('jw_tea', 'kettle')
+Dir[File.join(File.dirname(__FILE__), 'jw_tea', 'stores', '*.rb')].each {|file| require file }
 
 module JWTea
   class << self

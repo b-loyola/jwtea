@@ -8,7 +8,7 @@ Comes with a Redis store built-in, but allows for custom stores as well.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'jwtea-rb'
+gem 'jw_tea'
 ```
 
 And then execute:
@@ -17,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install jwtea
+    $ gem install jw_tea
 
 ## Usage
 
@@ -113,7 +113,7 @@ That's pretty much it!
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jwtea. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/b-loyola/jw_tea. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -121,4 +121,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the JWTea project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/jwtea/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the JWTea project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/b-loyola/jw_tea/blob/master/CODE_OF_CONDUCT.md).
