@@ -13,11 +13,12 @@ module JWTea
       @expires_in = (expires_in || ::JWTea.configuration.default_expires_in).to_i
     end
 
-    def brew(data)
+    def brew(data, key: nil)
       exp = @expires_in.seconds.from_now.to_i
-      token = ::JWTea::Token.build(data, exp, @secret, @algorithm)
-      @store.save(token.jti, token.exp, @expires_in)
-      token
+      ::JWTea::Token.build(data, exp, @secret, @algorithm).tap do |token|
+        key ||= token.key
+        @store.save(key, token.jti, @expires_in)
+      end
     end
 
     def pour(encoded_token)

@@ -13,7 +13,10 @@ RSpec.describe JWTea::Kettle do
 
   let(:exp) { expires_in.seconds.from_now.to_i }
   let(:jti) { 'jti' }
-  let(:token) { instance_double('JWTea::Token', jti: jti, exp: exp, data: data, encoded: encoded_token) }
+  let(:key) { 'key' }
+  let(:token) do
+    instance_double('JWTea::Token', jti: jti, exp: exp, data: data, encoded: encoded_token, key: key)
+  end
 
   let(:current_time) { Time.local(1984, 1, 1, 1) }
   around(:each) do |example|
@@ -26,11 +29,25 @@ RSpec.describe JWTea::Kettle do
   end
 
   describe '.brew' do
-    subject { kettle.brew(data) }
+    subject { kettle.brew(*args) }
 
-    it 'stores the token and returns it' do
-      expect(store).to receive(:save).with(jti, exp, expires_in)
-      is_expected.to be(token)
+    context 'without a key option' do
+      let(:args) { [data] }
+
+      it 'stores the token and returns it' do
+        expect(store).to receive(:save).with(key, jti, expires_in)
+        is_expected.to be(token)
+      end
+    end
+
+    context 'with a key option' do
+      let(:custom_key) { 'custom-key' }
+      let(:args) { [data, key: custom_key] }
+
+      it 'stores the token and returns it' do
+        expect(store).to receive(:save).with(custom_key, jti, expires_in)
+        is_expected.to be(token)
+      end
     end
   end
 
@@ -62,7 +79,7 @@ RSpec.describe JWTea::Kettle do
     subject { kettle.encode(data) }
 
     it 'stores the token and returns the encoded string' do
-      expect(store).to receive(:save).with(jti, exp, expires_in)
+      expect(store).to receive(:save).with(key, jti, expires_in)
       is_expected.to eq(encoded_token)
     end
   end

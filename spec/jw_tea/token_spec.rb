@@ -10,6 +10,7 @@ RSpec.describe JWTea::Token do
       'exp' => exp,
     }
   end
+  let(:token) { described_class.new(payload) }
 
   describe '.load' do
     subject { described_class.load(encoded_token, secret, algorithm) }
@@ -37,6 +38,26 @@ RSpec.describe JWTea::Token do
       )
       is_expected.to be_an_instance_of(described_class)
       expect(subject.encoded).to eq encoded_token
+    end
+  end
+
+  describe '#key' do
+    subject { token.key }
+
+    it { is_expected.to be_a(String) }
+
+    it 'is the same for multiple calls' do
+      is_expected.to eq token.key
+    end
+
+    it 'is not the same for tokens with the same data' do
+      alt_token = described_class.new(payload)
+      is_expected.not_to eq alt_token.key
+    end
+
+    it 'is the same for identical tokens' do
+      alt_token = described_class.new(token.payload.to_h)
+      is_expected.to eq alt_token.key
     end
   end
 end

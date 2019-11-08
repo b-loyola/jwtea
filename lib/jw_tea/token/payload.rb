@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'jwt'
+require 'forwardable'
 
 module JWTea
   class Token
@@ -11,6 +12,9 @@ module JWTea
           new(payload_hash.transform_keys(&:to_sym))
         end
       end
+
+      extend Forwardable
+      def_delegators :to_h, :to_s
 
       def initialize(data:, exp:, iat: nil, jti: nil)
         @data = data
