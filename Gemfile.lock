@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jw_tea (0.1.0)
+    jw_tea (0.1.1)
       activesupport
       jwt
       redis
