@@ -29,9 +29,5 @@ module JWTea
     def inspect
       to_s
     end
-
-    def key
-      @key ||= Digest::MD5.hexdigest(@payload.to_s)
-    end
   end
 end

@@ -3,15 +3,15 @@
 module JWTea
   module Stores
     class NullStore
-      def save(_key, _value, _ttl_in_seconds)
+      def save(_jti, _exp, _ttl_in_seconds)
         nil
       end
 
-      def exists?(_key, _value)
+      def exists?(_jti, _exp)
         true
       end
 
-      def delete(_key)
+      def delete(_jti)
         nil
       end
     end
